@@ -1,0 +1,24 @@
+= 1.0.7 =
+* Slider navigation issue fixed.
+
+= 1.0.6 =
+* Style issues fixed.
+
+= 1.0.5 =
+* Minor functional issues fixed.
+
+= 1.0.4 =
+* Style issues fixed.
+
+= 1.0.3 =
+* Style and functional issues fixed.
+
+= 1.0.2 =
+* Style and functional issues fixed.
+
+= 1.0.1 =
+* Changelog file added.
+* Screenshot upated.
+
+= 1.0.0 =
+* Initial release.
