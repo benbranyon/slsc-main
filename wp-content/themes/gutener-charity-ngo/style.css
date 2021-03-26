@@ -59,6 +59,11 @@ a:focus {
     padding: 0;
 }
 
+.overlay {
+    background-color: #fb1304;
+    opacity: 0.8;
+}
+
 .bottom-footer .container {
     align-items: center;
     display: flex;
