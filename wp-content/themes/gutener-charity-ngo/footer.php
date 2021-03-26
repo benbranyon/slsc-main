@@ -130,6 +130,7 @@
 								        echo '</ul>'; ?>
 							        </div>
 							<?php } ?> <!-- social links area -->
+							<?php get_template_part( 'template-parts/site', 'info' ); ?>
 							<?php if ( has_nav_menu( 'menu-2' ) && !get_theme_mod( 'disable_footer_menu', false )){ ?>
 								<div class="footer-menu"><!-- Footer Menu-->
 									<?php
@@ -179,6 +180,7 @@
 								?>
 							</div><!-- footer Menu-->
 						<?php } ?>
+						<?php get_template_part( 'template-parts/site', 'info' ); ?>
 					</div>
 				</div>
 			<?php } ?>
@@ -218,6 +220,7 @@
 							<?php } ?> 
 							<div class="<?php echo esc_attr( $socialEmptyClass ) ?>">
 								<div class="footer-desc-wrap">
+									<?php get_template_part( 'template-parts/site', 'info' ); ?>
 									<?php if ( has_nav_menu( 'menu-2' ) && !get_theme_mod( 'disable_footer_menu', false )){ ?>
 										<div class="footer-menu"><!-- Footer Menu-->
 											<?php
