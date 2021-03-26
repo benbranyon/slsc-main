@@ -59,7 +59,7 @@ a:focus {
     padding: 0;
 }
 
-.overlay {
+.site-header .overlay {
     background-color: #fb1304;
     opacity: 0.8;
 }
