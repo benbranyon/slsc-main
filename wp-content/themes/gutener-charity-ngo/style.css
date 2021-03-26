@@ -61,6 +61,8 @@ a:focus {
 
 .header-three .bottom-header .overlay {
     background-color: #fb1304;
+    background: #fb1304;
+    background: linear-gradient(0deg, rgba(251,19,4,0.18389362580969892) 30%, rgba(251,19,4,1) 80%);
     opacity: 0.6;
 }
 
