@@ -62,7 +62,7 @@ a:focus {
 .header-three .bottom-header .overlay {
     background-color: #fb1304;
     background: #fb1304;
-    background: radial-gradient(circle, rgba(251,19,4,0.18389362580969892) 18%, rgba(251,19,4,1) 90%); 
+    background: radial-gradient(circle, rgba(251,19,4,0.18389362580969892) 0%, rgba(251,19,4,1) 90%); 
     opacity: 0.6;
 }
 
