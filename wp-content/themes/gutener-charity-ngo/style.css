@@ -58,3 +58,10 @@ a:focus {
     transition: background-color 0.4s;
     padding: 0;
 }
+
+.bottom-footer .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
