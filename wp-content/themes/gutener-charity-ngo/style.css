@@ -64,6 +64,12 @@ a:focus {
     opacity: 0.6;
 }
 
+.home .header-three:not(.sticky-header) .main-navigation ul.menu > li > a {
+    color: #161414;
+    font-size; 22px;
+    font-weight: bold;
+}
+
 .bottom-footer .container {
     align-items: center;
     display: flex;
