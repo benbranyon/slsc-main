@@ -45,7 +45,7 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 		 * @return void
 		 */
 		public function run() {
-			add_filter( 'gutentor_p6_post_module_template_data', array( $this, 'template_data' ), 999, 3 );
+			add_filter( 'gutentor_post_module_p6_query_data', array( $this, 'template_data' ), 999, 3 );
 		}
 
 		/**
@@ -68,7 +68,8 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 			$rating_html           = wc_get_rating_html( $rating, $count );
 			$query_sorting         = array_key_exists( 'blockFPSortableItems', $attributes ) ? $attributes['blockFPSortableItems'] : false;
 			$enable_featured_image = ( isset( $attributes['pOnFPFImg'] ) ) ? $attributes['pOnFPFImg'] : false;
-
+            $enable_avatar  = ( isset( $attributes['pFPOnAvatar'] ) ) ? $attributes['pFPOnAvatar'] : false;
+            $avatar_pos     = ( isset( $attributes['pFPAvatarPos'] ) ) ? $attributes['pFPAvatarPos'] : false;
 			$enable_post_format  = ( isset( $attributes['pOnFPPostFormatOpt'] ) ) ? $attributes['pOnFPPostFormatOpt'] : false;
 			$post_format_pos     = ( isset( $attributes['pFPPostFormatPos'] ) ) ? $attributes['pFPPostFormatPos'] : false;
 			$cat_pos             = ( isset( $attributes['pFPCatPos'] ) ) ? $attributes['pFPCatPos'] : false;
@@ -84,7 +85,10 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 				$url         = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $attributes['pFPFImgSize'] );
 				$default_url = WC()->plugin_url() . '/assets/images/placeholder.png';
 				$overlay     = $enable_overlayImage ? 'gutentor-overlay' : '';
-				$output     .= '<div class="' . gutentor_concat_space( 'gutentor-post-featured-height', 'gutentor-bg-image', $overlay ) . '" style="background-image:url(' . esc_url( $url[0] ? $url[0] : $default_url ) . ')">';
+				$output     .= '<div class="' . gutentor_concat_space( 'gutentor-post-featured-height', 'gutentor-bg-image', $overlay ) . '" style="background-image:url(' . esc_url( is_array($url) && !empty($url) ? $url[0] : $default_url ) . ')">';
+                if ( $enable_avatar && $this->avatar_fp_on_image_condition( $avatar_pos ) ) {
+                    $output .= $this->get_fp_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $this->featured_post_format_on_image_condition( $post_format_pos ) ) {
 					$output .= $this->p6_fp_new_badge_product( $post, $product );
 				}
@@ -136,6 +140,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 									}
 								}
 								break;
+                            case 'avatar':
+                                $output .= $this->get_fp_avatar_data( $post, $attributes );
+                                break;
 							case 'description':
 								if ( $cat_pos === 'gutentor-fp-cat-pos-before-ct-box' || $post_format_pos === 'gutentor-fp-pf-pos-before-ct-box' ) {
 									$output .= '<div class="gutentor-post-desc-data-wrap">';
@@ -218,7 +225,8 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 			$output                = '';
 			$query_sorting         = array_key_exists( 'blockFPSortableItems', $attributes ) ? $attributes['blockFPSortableItems'] : false;
 			$enable_featured_image = ( isset( $attributes['pOnFPFImg'] ) ) ? $attributes['pOnFPFImg'] : false;
-
+            $enable_avatar  = ( isset( $attributes['pFPOnAvatar'] ) ) ? $attributes['pFPOnAvatar'] : false;
+            $avatar_pos     = ( isset( $attributes['pFPAvatarPos'] ) ) ? $attributes['pFPAvatarPos'] : false;
 			$enable_post_format = ( isset( $attributes['pOnFPPostFormatOpt'] ) ) ? $attributes['pOnFPPostFormatOpt'] : false;
 			$post_format_pos    = ( isset( $attributes['pFPPostFormatPos'] ) ) ? $attributes['pFPPostFormatPos'] : false;
 			$output            .= "<article class='" . apply_filters( 'gutentor_post_module_article_class', gutentor_concat_space( 'gutentor-post', 'gutentor-post-featured', 'gutentor-post-item-' . $index ), $attributes ) . "'>";
@@ -232,7 +240,10 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 				$url         = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $attributes['pFPFImgSize'] );
 				$default_url = GUTENTOR_URL . 'assets/img/default-image.jpg';
 				$overlay     = $enable_overlayImage ? 'gutentor-overlay' : '';
-				$output     .= '<div class="' . gutentor_concat_space( 'gutentor-post-featured-height', 'gutentor-bg-image', $overlay ) . '" style="background-image:url(' . esc_url( is_array( $url ) && ! empty( $url ) ? $url[0] : $default_url ) . ')">';
+				$output     .= '<div class="' . gutentor_concat_space( 'gutentor-post-featured-height', 'gutentor-bg-image', $overlay ) . '" style="background-image:url(' . esc_url( is_array( $url ) && !empty( $url ) ? $url[0] : $default_url ) . ')">';
+                if ( $enable_avatar && $this->avatar_fp_on_image_condition( $avatar_pos ) ) {
+                    $output .= $this->get_fp_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $this->featured_post_format_on_image_condition( $post_format_pos ) ) {
 					$output .= $this->p6_fp_edd_new_badge_product( $post, $download );
 				}
@@ -274,6 +285,9 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 									}
 								}
 								break;
+                            case 'avatar':
+                                $output .= $this->get_fp_avatar_data( $post, $attributes );
+                                break;
 							case 'description':
 								if ( $post_format_pos === 'gutentor-fp-pf-pos-before-ct-box' ) {
 									$output .= '<div class="gutentor-post-desc-data-wrap">';
@@ -339,7 +353,7 @@ if ( ! class_exists( 'Gutentor_Duplex_P6_T1' ) ) {
 			while ( $the_query->have_posts() ) :
 				$the_query->the_post();
 				if ( $index === 0 ) {
-					$output .= "<div class='" . apply_filters( 'gutentor_post_module_grid_column_class', 'grid-lg-6 grid-md-6 grid-12', $attributes ) . "'>";
+					$output .= "<div class='" . apply_filters( 'gutentor_post_module_p6_grid_column_class', 'grid-lg-6 grid-md-6 grid-12', $attributes ) . "'>";
 					if ( $post_type === 'product' ) {
 						$output .= $this->p6_template1_featured_woo_single_article( get_post(), $attributes, $index );
 					} elseif ( $post_type === 'download' ) {

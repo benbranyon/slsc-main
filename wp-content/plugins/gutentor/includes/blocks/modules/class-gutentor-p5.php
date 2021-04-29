@@ -188,7 +188,10 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 		public function render_callback( $attributes, $content ) {
 			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
-			$output  = '';
+            $output  = $default_class = '';
+            if ( isset( $attributes['className'] ) ) {
+                $default_class = esc_attr( $attributes['className'] );
+            }
 			// the query
 			$args = array(
 				'posts_per_page' => $attributes['postsToShow'],
@@ -241,7 +244,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 
 			$the_query = new WP_Query( gutentor_get_query( $args ) );
 			if ( $the_query->have_posts() ) :
-				$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'gutentor-post-module-p5', 'section-' . $gID, $template, $align ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '' . gutentor_get_html_attr( apply_filters( 'gutentor_edit_news_ticker_data_attr', array(), $attributes ) ) . '>' . "\n";
+				$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'gutentor-post-module', 'gutentor-post-module-p5', 'section-' . $gID, $template, $align,$default_class ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '' . gutentor_get_html_attr( apply_filters( 'gutentor_edit_news_ticker_data_attr', array(), $attributes ) ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 				$output .= "<div class='" . apply_filters( 'gutentor_post_module_p5_newsticker_wrap_class', 'gutentor-news-ticker', $attributes ) . "'>";
 				$output .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
@@ -254,7 +257,7 @@ if ( ! class_exists( 'Gutentor_P5' ) ) {
 				while ( $the_query->have_posts() ) :
 					$the_query->the_post();
 					$output .= '<li>';
-					$output .= apply_filters( 'gutentor_post_module_p5_template_data', '', get_post(), $attributes );
+					$output .= apply_filters( 'gutentor_post_module_p5_query_data', '', get_post(), $attributes );
 					$output .= '</li>';/*.li*/
 				endwhile;
 				$output .= '</ul>';/*.ul*/

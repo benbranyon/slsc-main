@@ -45,7 +45,7 @@ if ( ! class_exists( 'Gutentor_Ticker_P5_Templates' ) ) {
 		 * @return void
 		 */
 		public function run() {
-			add_filter( 'gutentor_post_module_p5_template_data', array( $this, 'load_blog_post_template' ), 99999, 3 );
+			add_filter( 'gutentor_post_module_p5_query_data', array( $this, 'load_blog_post_template' ), 99999, 3 );
 		}
 
 		/**

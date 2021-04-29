@@ -81,6 +81,7 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 					),
 				)
 			);
+
 		}
 
 		/**
@@ -181,9 +182,8 @@ if ( ! class_exists( 'Gutentor_Advanced_Import' ) ) {
 			$url = $request->get_param( 'url' );
 
 			$url_array  = explode( '/', $url );
-			$block_id   = $url_array[ count( $url_array ) - 2 ];
+			$block_id   = $url_array[ count( $url_array ) - 5 ].'-'.$url_array[ count( $url_array ) - 2 ];
 			$block_json = get_transient( 'gutentor_get_block_json_' . $block_id );
-
 			/*Get/Fetch templates*/
 			if ( empty( $block_json ) ) {
 				if ( $url ) {

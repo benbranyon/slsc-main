@@ -192,7 +192,10 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 
 			$blockID = isset( $attributes['mID'] ) ? $attributes['mID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
-			$output  = '';
+            $output  = $default_class = '';
+            if ( isset( $attributes['className'] ) ) {
+                $default_class = esc_attr( $attributes['className'] );
+            }
 
 			$tag           = $attributes['mTag'] ? $attributes['mTag'] : 'section';
 			$template      = $attributes['t1Temp'] ? $attributes['t1Temp'] : '';
@@ -225,7 +228,7 @@ if ( ! class_exists( 'Gutentor_T1' ) ) {
 				)
 			);
 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-				$output .= '<' . $tag . ' id="' . esc_attr( $blockID ) . '" class="' . apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t1', $align, $termStyle, $tRevContClass, $template ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+				$output .= '<' . $tag . ' id="' . esc_attr( $blockID ) . '" class="' . apply_filters( 'gutentor_term_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-module', 'gtf-module', 'gutentor-term-module', 'gutentor-term-module-t1', $align, $termStyle, $tRevContClass, $template,$default_class ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_term_module_before_container', '', $attributes );
 				$output .= "<div class='" . apply_filters( 'gutentor_term_module_container_class', 'grid-container', $attributes ) . "'>";
 				$output .= apply_filters( 'gutentor_term_module_before_block_items', '', $attributes );

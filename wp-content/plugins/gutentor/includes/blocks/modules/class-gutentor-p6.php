@@ -193,6 +193,31 @@ if ( ! class_exists( 'Gutentor_P6' ) ) {
 					'type'    => 'boolean',
 					'default' => true,
 				),
+                /*Featured Post avatar*/
+                'pFPOnAvatar'          => array(
+                    'type'    => 'boolean',
+                    'default' => false,
+                ),
+                'pFPAvatarPos'         => array(
+                    'type'    => 'string',
+                    'default' => 'g-avatar-img-fp-t-l',
+                ),
+                'pFPAvatarSize'        => array(
+                    'type'    => 'string',
+                    'default' => '48',
+                ),
+                'pFPAvatarOColor'      => array(
+                    'type'    => 'object',
+                    'default' => array(
+                        'enable' => false,
+                        'normal' => '',
+                        'hover'  => '',
+                    ),
+                ),
+                'pFPOnByAuthor'        => array(
+                    'type'    => 'boolean',
+                    'default' => false,
+                ),
 			);
 			$blog_partial_attrs = array_merge_recursive( $blog_post_attr, $this->get_module_common_attrs() );
 			$blog_partial_attrs = array_merge_recursive( $blog_partial_attrs, $this->get_module_query_elements_common_attrs() );
@@ -215,7 +240,10 @@ if ( ! class_exists( 'Gutentor_P6' ) ) {
 
 			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
-			$output  = '';
+            $output  = $default_class = '';
+            if ( isset( $attributes['className'] ) ) {
+                $default_class = esc_attr( $attributes['className'] );
+            }
 
 			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'div';
 			$template                = $attributes['p6Temp'] ? $attributes['p6Temp'] : '';
@@ -292,14 +320,14 @@ if ( ! class_exists( 'Gutentor_P6' ) ) {
 			$the_query         = new WP_Query( gutentor_get_query( $query_args ) );
 			$single_post_class = $the_query->post_count === 1 ? 'gutentor-single-post' : '';
 
-			$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p6', $single_post_class, $template, $align ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+			$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p6', $single_post_class, $template, $align,$default_class ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" data-gbid="' . esc_attr( $gID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 			$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 			$output .= "<div class='" . apply_filters( 'gutentor_post_module_container_class', 'grid-container', $attributes ) . "'>";
 			$output .= apply_filters( 'gutentor_post_module_before_block_items', '', $attributes );
 			$output .= "<div class='" . apply_filters( 'gutentor_post_module_grid_row_class', 'grid-row', $attributes ) . "' " . gutentor_get_html_attr( apply_filters( 'gutentor_post_module_attr', array(), $attributes ) ) . '>';
 
 			if ( $the_query->have_posts() ) :
-				$output .= apply_filters( 'gutentor_p6_post_module_template_data', '', $the_query, $attributes );
+				$output .= apply_filters( 'gutentor_post_module_p6_query_data', '', $the_query, $attributes );
 			else :
 				$output .= '<header class="g-n-f-t-1"><h2 class="g-n-f-title">' . esc_html( $nothing_found_text ) . '</h2></header>';
 			endif;

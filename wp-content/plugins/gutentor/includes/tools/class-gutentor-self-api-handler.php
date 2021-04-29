@@ -893,10 +893,10 @@ ORDER BY post_count DESC"
 			$taxonomy = $request->get_param( 'taxonomy' ) ? $request->get_param( 'taxonomy' ) : 'category';
 			/*custom thumbnail*/
 			$taxonomy_allow = array( 'category', 'post_tag', 'product_tag', 'download_category', 'download_tag' );
-
+            $enabled_term_image = gutentor_get_options( 'gutentor_tax_term_image' );
 			if ( $taxonomy === 'product_cat' ) {
 				$thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
-			} elseif ( in_array( $taxonomy, $taxonomy_allow ) ) {
+			} elseif ( $enabled_term_image && in_array( $taxonomy, $taxonomy_allow ) ) {
 				$gutentor_meta = get_term_meta( $term->term_id, 'gutentor_meta', true );
 				$thumbnail_id  = isset( $gutentor_meta['featured-image'] ) ? $gutentor_meta['featured-image'] : '';
 			}
@@ -1106,9 +1106,12 @@ ORDER BY post_count DESC"
 						$value = sanitize_text_field( $value );
 					} elseif ( 'gutentor_force_load_block_assets' == $key ) {
 						$value = gutentor_sanitize_checkbox( $value );
-					} elseif ( 'gutentor_tax_term_color' == $key ) {
+					} elseif ( 'gutentor_disable_wide_width_editor' == $key ) {
 						$value = gutentor_sanitize_checkbox( $value );
-					} elseif ( 'gutentor_tax_term_image' == $key ) {
+					} elseif ( 'gutentor_tax_term_color' == $key ) {
+                        $value = gutentor_sanitize_checkbox( $value );
+                    }
+					elseif ( 'gutentor_tax_term_image' == $key ) {
 						$value = gutentor_sanitize_checkbox( $value );
 					} elseif ( 'gutentor_load_optimized_css' == $key ) {
 						$value = gutentor_sanitize_checkbox( $value );

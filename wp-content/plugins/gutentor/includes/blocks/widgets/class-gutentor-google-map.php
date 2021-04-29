@@ -175,10 +175,10 @@ if ( ! class_exists( 'Gutentor_Google_Map' ) ) {
 
 			$id      = isset( $attributes['id'] ) ? $attributes['id'] : 'gutentor-google-map-' . rand( 10, 100 );
 			$blockID = isset( $attributes['blockID'] ) ? $attributes['blockID'] : '';
-			$class   = 'gutentor-google-map';
+			$default_class   = '';
 
 			if ( isset( $attributes['className'] ) ) {
-				$class .= ' ' . esc_attr( $attributes['className'] );
+                $default_class = ' ' . esc_attr( $attributes['className'] );
 			}
 
 			$align = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
@@ -187,11 +187,11 @@ if ( ! class_exists( 'Gutentor_Google_Map' ) ) {
 			$blockComponentAnimation = isset( $attributes['blockComponentAnimation'] ) ? $attributes['blockComponentAnimation'] : '';
 			$blockItemsWrapAnimation = isset( $attributes['blockItemsWrapAnimation'] ) ? $attributes['blockItemsWrapAnimation'] : '';
 
-			$output  = '<' . $tag . ' class="' . apply_filters( 'gutentor_save_section_class', 'gutentor-section gutentor-google-map ' . $align, $attributes ) . '" id="section-' . esc_attr( $blockID ) . '"   ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+			$output  = '<' . $tag . ' class="' . apply_filters( 'gutentor_save_section_class',gutentor_concat_space( 'gutentor-section gutentor-google-map',$align,$default_class ), $attributes ) . '" id="section-' . esc_attr( $blockID ) . '"   ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 			$output .= apply_filters( 'gutentor_save_before_container', '', $attributes );
 			$output .= "<div class='" . apply_filters( 'gutentor_save_container_class', 'grid-container', $attributes ) . "'>";
 			$output .= apply_filters( 'gutentor_save_before_block_items', '', $attributes );
-			$output .= '<div class="' . apply_filters( 'gutentor_save_grid_row_class', gutentor_concat_space( esc_attr( $class ), 'gutentor-grid-item-wrap' ), $attributes ) . '" id="' . esc_attr( $id ) . '" ' . GutentorAnimationOptionsDataAttr( $blockItemsWrapAnimation ) . '></div>' . "\n";
+			$output .= '<div class="' . apply_filters( 'gutentor_save_grid_row_class', esc_attr('gutentor-grid-item-wrap' ), $attributes ) . '" id="' . esc_attr( $id ) . '" ' . GutentorAnimationOptionsDataAttr( $blockItemsWrapAnimation ) . '></div>' . "\n";
 			$output .= apply_filters( 'gutentor_save_after_block_items', '', $attributes );
 			$output .= '</div>' . "\n";
 			$output .= apply_filters( 'gutentor_save_after_container', '', $attributes );

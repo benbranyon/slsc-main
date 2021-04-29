@@ -662,8 +662,8 @@ if ( ! class_exists( 'Gutentor_Admin' ) ) {
 
 		/*Taxonomy Fields*/
 		public function taxonomy_edit_meta_field( $term ) {
-			$enabled_term_color = gutentor_get_options( 'gutentor_tax_term_color' );
-			$enabled_term_image = gutentor_get_options( 'gutentor_tax_term_image' );
+            $enabled_term_color = gutentor_get_options( 'gutentor_tax_term_color' );
+            $enabled_term_image = gutentor_get_options( 'gutentor_tax_term_image' );
 
 			// Retrieve the existing value(s) for this meta field.
 			$gutentor_meta    = $term && ! empty( $term->term_id ) ? get_term_meta( $term->term_id, 'gutentor_meta', true ) : false;

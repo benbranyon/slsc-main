@@ -719,6 +719,23 @@
             e.preventDefault();
         });
 
+        /* Table of content Accordion*/
+        gDocument.on('click', '.g-toc-header', function(e) {
+            let gThis = $(this),
+                toc_parent = gThis.closest('.gutentor-module-table-of-contents'),
+                toc_body = toc_parent.find('.g-toc-body');
+            if(toc_parent.hasClass('g-enable-collapsible')){
+                if (toc_body.is(":visible")) {
+                    toc_body.slideUp();
+                    gThis.removeClass('g-collapsible-active');
+                } else {
+                    gThis.addClass('g-collapsible-active');
+                    toc_body.slideDown();
+                }
+            }
+            e.preventDefault();
+        });
+
         /* Module Tab*/
         $('.gutentor-module-tabs-item').each(function() {
             $(this).on('click', function(e) {

@@ -22,6 +22,9 @@ settings_errors( 'gutentor_settings_messages' );
         <a href="#general" class="nav-tab nav-tab-active" data-action="gutentor-general">
             <?php esc_attr_e( 'General', 'gutentor' ); ?>
         </a>
+        <a href="#optimization" class="nav-tab" data-action="gutentor-optimization">
+            <?php esc_attr_e( 'Optimization', 'gutentor' ); ?>
+        </a>
         <?php
         if( gutentor_is_edd_active()){
             ?>
@@ -39,6 +42,7 @@ settings_errors( 'gutentor_settings_messages' );
         // output setting sections and their fields
         // (sections are registered for "gutentor_settings", each field is registered to a specific section)
         do_settings_sections( 'gutentor_general_settings' );
+        do_settings_sections( 'gutentor_optimization_settings' );
         do_settings_sections( 'gutentor_edd_settings' );
         // output save settings button
         submit_button( 'Save Settings' );

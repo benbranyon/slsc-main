@@ -4,9 +4,9 @@ Contributors: gutentor, acmeit, addonspress, codersantosh
 Donate link: https://www.gutentor.com/
 Tags: gutenberg, block, blocks, gutenberg blocks, editor, page-builder, visual editor, wysiwyg, design, google fonts, patterns, reusable, block editor, drag-and-drop, landing page, website builder, landing page builder, guten, gutentor, editor, gutenberg-blocks, gutenberg editor
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 5.6.20
-Stable tag: 3.0.7
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Advanced yet easy, Gutenberg editor page builder blocks. Create a masterpiece, p
 
 == Description ==
 
-[Gutentor Home](https://www.gutentor.com/) | [Documentation](https://www.gutentor.com/documentation/) | [Video Tutorials](https://www.youtube.com/watch?v=noppoc1zLIk&list=PLDLpZS3H6SMnpUnrU84LwFs9AAzTYcbmA) | [Demo 1](https://www.demo.gutentor.com/) | [Demo 2](https://www.demo.cosmoswp.com/)
+[Gutentor](https://www.gutentor.com/) | [Documentation](https://www.gutentor.com/documentation/) | [Video Tutorials](https://www.youtube.com/watch?v=noppoc1zLIk&list=PLDLpZS3H6SMnpUnrU84LwFs9AAzTYcbmA) | [Gutenberg Templates](https://templateberg.com/gutenberg-templates/)
 
 https://www.youtube.com/watch?v=bGMi7L78hVk
 
@@ -22,9 +22,9 @@ https://www.youtube.com/watch?v=bGMi7L78hVk
 
 It’s time for [Gutentor - Page Builder for Gutenberg](https://www.gutentor.com/). Try it now, It's Free!!!
 
-Gutentor is a WordPress Page Building Gutenberg Blocks collections with unlimited possibilities to design a webpage. Building professional elegant websites using new WordPress editor Gutenberg with very ease and with no absolute codes is what Gutentor is designed for. A page builder experience that brings advanced capabilities and graceful design never seen before on any Page Builder. Work with any theme, create any design.
+Gutentor is a WordPress Page Building Gutenberg Blocks collections with unlimited possibilities to design a webpage. Building professional elegant websites using the new WordPress editor Gutenberg with very ease and with no absolute codes is what Gutentor is designed for. A page builder experience that brings advanced capabilities and graceful design never seen before on any Page Builder. Work with any theme, create any design.
 
-Gutentor extends Gutenberg editor with a large variety of beautiful blocks which can be later switched to build and design your best web pages with some clicks. This makes creating and designing content even more flexible. It minimizes limitations of any page builders and adds unlimited possibilities so that a user can build any simple to complex WordPress website using the Gutenberg editor. It has been developed with all necessary customization features for blocks to achieve any possible layout and design of web-page content with Gutenberg block editor. Gutentor makes designing any type of web pages just as simple as a matter of a few clicks and drag and drop.
+Gutentor extends Gutenberg editor with a large variety of beautiful blocks which can be later switched to build and design your best web pages with some clicks. This makes creating and designing content even more flexible. It minimizes the limitations of any page builders and adds unlimited possibilities so that a user can build any simple to complex WordPress website using the Gutenberg editor. It has been developed with all necessary customization features for blocks to achieve any possible layout and design of web-page content with Gutenberg block editor. Gutentor makes designing any type of web pages just as simple as a matter of a few clicks and drag and drop.
 
 Gutentor is a lightweight WordPress plugin, it is optimized for performance. Internal or External CSS files for dynamic CSS is introduced for more optimization.
 
@@ -64,6 +64,21 @@ While you use Template Library features of Gutentor, Gutentor fetches screenshot
 * JS/CSS Framework only load if block is being used on the post and page
 * Quality support service
 
+
+== Technical background for page speed ==
+
+Gutentor just does not help you to create your site more beautiful and quickly but it made your page speed much faster. Here are some technical reasons behind it.
+
+* Develop keeping in mind for Page Speed.
+* Gutentor creates a single minified CSS file for only used Gutentor blocks in the editor, for normal to advanced landing pages it is less than 50kb, for a simple page design 20kb or even less.
+* Unnecessary resources CSS/JS never loaded on your page.
+* Full control to choose which resources to load or not.
+* Proper utilization of transients API.
+* Dynamic content loading whenever needed.
+* Google fonts load only if it is being used and unique font family/weight with a single request.
+* In build Optimization options on [Gutentor Global Options](https://www.gutentor.com/documentation/article/global-options/).
+* Compatible with Optimization/Cache Plugins.
+
 == ADVANCED PAGE BUILDING GUTENBERG BLOCKS INSIDE GUTENTOR ==
 
 Gutentor Blocks are categorized on 5 different types:
@@ -98,6 +113,8 @@ Gutentor Blocks are categorized on 5 different types:
 * Form Wrapper
 * Gallery
 * Filter
+* Quote
+* Table of Contents
 
 === 3. GUTENTOR POSTS (POST TYPES) ===
 
@@ -151,7 +168,7 @@ Here are the details of the Gutentor blocks:
 
 === 1. GUTENTOR ELEMENTS ===
 
-Gutentor elements are conceptualized to use inside the Gutentor Modules but of course, you can use it anywhere on your editor. Gutentor elements are a small unit of Gutenberg blocks with all set of designing options, combining gutentor elements you can move up to the elegant blocks, sections and full page.
+Gutentor elements are conceptualized to use inside the Gutentor Modules but of course, you can use them anywhere on your editor. Gutentor elements are a small unit of Gutenberg blocks with all set of designing options, combining gutentor elements you can move up to the elegant blocks, sections and full page.
 
 - **Advanced Text:** Insert text with advanced options.
 
@@ -191,9 +208,9 @@ Gutentor modules are designed and developed in such a way that you can construct
 
 - **Container/Cover:** Insert the whole block of a single container on the page.
 
-- **Dynamic Columns:** Creating column on the editor is never been easier before, insert dynamic columns to insert unlimited columns with advanced options.
+- **Dynamic Columns:** Creating columns on the editor is never been easier before, insert dynamic columns to insert unlimited columns with advanced options.
 
-- **Slider:** We present you the most advanced and awesome Slider. Insert slider with advanced options and add any elements within the slide like text, image, button, video and all gutentor elements.
+- **Slider:** We present you with the most advanced and awesome Slider. Insert slider with advanced options and add any elements within the slide like text, image, button, video and all gutentor elements.
 
 - **Accordion:** Accordion Module lets you design Accordion ( Collapse ) Items and pin any Gutentor Elements on Accordion Body. Accordion Panel ( Heading ) is created with Texts and Icons with various design options. Create beautiful FAQ, Accordion, and collapsible items using Accordion Module.
 
@@ -207,7 +224,11 @@ Gutentor modules are designed and developed in such a way that you can construct
 
 - **Filter:** Filter block has module gallery all features with added primary/secondary filters items and searches filter. Filter block uses Module Gallery block as an inner block.
 
-We have the plan to develop more gutentor elements and gutentor module on the coming version. Gutenberg Blocks in Gutentor elements and Gutentor modules are designed and developed on the concept of Atomic Design with better UX and speedy design.
+- **Quote (New):** Quote is the collection of elements that create an adorable quote design.
+
+- **Table of Contents (New):** Table of Contents(TOC) facilitates to access large contents of post/page including all the headings.
+
+We have a plan to develop more gutentor elements and gutentor modules in the coming version. If you have any suggestions feel free to contact us on the [Gutentor support forum](https://wordpress.org/support/plugin/gutentor/).
 
 === 3. GUTENTOR POSTS (POST TYPES) ===
 
@@ -226,7 +247,7 @@ Gutenberg Block in Gutentor Post
 
 - **Advanced Post (Type):** - Advanced Post (Type) is a combination of multiple blocks like Post (Type), Post Header and Post Footer. Post Header is a template combination of Gutentor Simple Text, Term Filter and Navigation. Similarly, Post Footer is a template combination of Gutentor Simple Text, Term Filter, Pagination, Navigation and Load more button. This module is the most advanced block we have ever build, try it out and control each element.
 
-- **Post (Type) Carousel:** - Post (Type) Carousel use Post (Type) as an inner block. You have all options of Post (Type) on Post (Type) Carousel with added Advanced Carousel Options. Since we are using framework Slick Carousel, we have added almost all possible and useful options related to the Slick Carousel. Create beautiful and unique Post Carousel using our Post (Type) Carousel.
+- **Post (Type) Carousel:** - Post (Type) Carousel use Post (Type) as an inner block. You have all options of Post (Type) on Post (Type) Carousel with added Advanced Carousel Options. Since we are using the framework Slick Carousel, we have added almost all possible and useful options related to the Slick Carousel. Create a beautiful and unique Post Carousel using our Post (Type) Carousel.
 
 - **Post (Type) News Ticker:** - News Ticker is very important for Magazine and News Site. To create a news ticker module on Gutentor, we have developed our own jQuery library AcmeTicker. It includes all major and useful options to create News Ticker unique and beautiful.
 
@@ -234,7 +255,7 @@ Gutenberg Block in Gutentor Post
 
 === 4. GUTENTOR TERMS ( CATEGORY AND CUSTOM TAXONOMY ) ===
 
-- **Term (Category):** Similar like Post (Type) block but in Term (Category) you can customize any term with beautiful design.
+- **Term (Category):** Similar to Post (Type) block but in Term (Category) you can customize any term with a beautiful design.
 
 - **Term (Category) Feature:** - 38 unique and lovely templates to showcase your Category and Term similar to Post (Type) Feature. Very useful to Blog, Magazine and E-commerce sites.
 
@@ -242,7 +263,7 @@ Gutenberg Block in Gutentor Post
 
 === 5. GUTENTOR WIDGETS ===
 
-Gutentor widgets are independent blocks, a very simple way to create your site section and blocks. The main difference between Gutentor Module and Gutentor Modules is Gutentor widgets have already predefined elements, you will not be able to add new elements whereas on Gutentor Modules you have to add individual Gutentor Elements as you want.
+Gutentor widgets are independent blocks, a very simple way to create your site section and blocks. The main difference between Gutentor Module and Gutentor Widgets is Gutentor widgets have already predefined elements, you will not be able to add new elements whereas on Gutentor Modules you can/have to add individual Gutentor Elements as you want.
 
 - **About Widget:** Gutentor’s About block lets you add titles, photo, description and buttons to design the about section of your web page. You can choose the About Block design from 3 preset Template. Each individuals elements has its options for colour, margin-padding, typography, border and other necessary options.
 
@@ -250,7 +271,7 @@ Gutentor widgets are independent blocks, a very simple way to create your site s
 
 - **Advanced List Widget:** The Advanced List Block helps to represent list item with default HTML list, icon, or image with column and other advanced options.
 
-- **Author Profile Widget:** This block has been built especially for displaying the details description of certain authors.
+- **Author Profile Widget:** This block has been built especially for displaying the detailed description of certain authors.
 
 - **Post Widget:** The Post block display collection of posts with different settings related to post items.
 
@@ -262,17 +283,17 @@ Gutentor widgets are independent blocks, a very simple way to create your site s
 
 - **Counter Widget:** Counter Block represents the facts and figures related to any product, item or any product with cool animation, features and many more fascinated templates.
 
-- **Featured Widget:** The Featured block displays large section with a photo, title, description, and button. Mainly, it is used in the header part of the site.
+- **Featured Widget:** The Featured block displays a large section with a photo, title, description, and button. Mainly, it is used in the header part of the site.
 
 - **Gallery Widget:** The Gallery Block allows a user to create a captivating gallery of image with a caption to showcase images of portfolio, services or products.
 
-- **Google Map Widget:** Google Map Block facilitates user to display the location of organization, company or any place. You can let visitors know where your company is exactly positioned.
+- **Google Map Widget:** Google Map Block facilitates user to display the location of an organization, company or any place. You can let visitors know where your company is exactly positioned.
 
 - **Icon Widget:** Icon Block is useful to represent any icon of any sort of items on your website.
 
 - **Image Widget:** The Image Block is generated to display information with an image in a standard and unique way. You can also add a title, description, and button along with the image.
 
-- **Image Slider Widget:** The Image Slider Block display adorable slider with image, title, description, and a button which can be modified by available features and functionalities.
+- **Image Slider Widget:** The Image Slider Block display an adorable slider with an image, title, description, and a button that can be modified by available features and functionalities.
 
 - **Notification Widget:** The Notification Block display different types of notification like Success, Error, Warning or Information notification with various options.
 
@@ -282,11 +303,11 @@ Gutentor widgets are independent blocks, a very simple way to create your site s
 
 - **Progress Bar Widget:** The progress bar block is designed to let the user create a customizable bar and/or circle progress counter to represent percentage values.
 
-- **Restaurant Menu Widget:** The Restaurant Menu Block has been designed particularly for users building website on restaurants or cafes. It is used for preparing online menus.
+- **Restaurant Menu Widget:** The Restaurant Menu Block has been designed particularly for users building website in restaurants or cafes. It is used for preparing online menus.
 
 - **Social Links Widget:** The Social Links Block displays the social networks page on a website with different templates and several features.
 
-- **Show More Widget:** The Show More Block helps the user to display certain excerpt or less text of the content and after clicking show more button then it will display the full content.
+- **Show More Widget:** The Show More Block helps the user to display certain excerpt or less text of the content and after clicking the show more button then it will display the full content.
 
 - **Tabs Widget:** The Tabs Block facilitates user to display content in a fully tabbed UX which contains title, description and buttons with many templates.
 
@@ -297,19 +318,6 @@ Gutentor widgets are independent blocks, a very simple way to create your site s
 - **Timeline Widget:** The Timeline Block is one of the most significant blocks builds for your website. It is used to represent the user information or events in chronological order with different styles.
 
 - **Video Popup Widget:** The Video Popup Block display video from YouTube, Vimeo link or custom uploaded a video in popup mode with several styles. Advanced video control options are available.
-
-== Technical background for page speed ==
-
-Gutentor just does not help you to create your site more beautiful and quickly but it made your page speed much faster. Here are some technical reasons behind it.
-
-* Develop keeping in mind for Page Speed.
-* Gutentor creates a single minified CSS file for only used Gutentor blocks in the editor, for normal to advanced landing pages it is less than 50kb, for a simple page design 20kb or even less.
-* Unnecessary resources CSS/JS never loaded on your page.
-* Proper utilization of transients API.
-* Dynamic content loading whenever needed.
-* Google fonts load only if it is being used and unique font family/weight with a single request.
-* In build Optimization options on [Gutentor Global Options](https://www.gutentor.com/documentation/article/global-options/).
-* Compatible with Optimization/Cache Plugins.
 
 == Frequently Asked Questions ==
 
@@ -343,14 +351,14 @@ Yes, Gutentor supports all plugins based on Post, Custom Post Types and Taxonomi
 
 = Do I need to know to code to use Gutentor? =
 
-Not! Gutentor is a full-fledged WordPress page builder, With simple click and drag and drops you can create an elegant design with no need to write even a single line of code.
+Not! Gutentor is a full-fledged WordPress page builder, With a simple click and drag and drops you can create an elegant design with no need to write even a single line of code.
 
-= My theme uses Fontawesome 4. *, the icon shows just box, how to fix it? =
+= My theme uses Fontawesome 4. *, the icon shows just a box, how to fix it? =
 
 By default, Gutentor uses Fontawesome 5 Icons, But you can switch between Fontawesome 4 and Fontawesome 5.
 
 Add/Edit any page/post, Go to [Gutentor Global Options](https://www.gutentor.com/documentation/article/global-options/) => General Options => Font Awesome Version,
-And Select appropriate Font Awesome Version.
+And Select the appropriate Font Awesome Version.
 
 = Do you offer Support? =
 
@@ -369,12 +377,45 @@ Yes, We provide Free Support via [WordPress Support Forum](https://wordpress.org
 3. Gutentor Blocks: Showcase of our beautiful ready-made blocks to import
 4. Gutentor Blocks Library: Choose one of our beautiful pre-design blocks and customize it according to your requirements
 5. Gutentor Template Library: Showcase of our beautiful ready-made templates, ready to import
-6. Gutentor Template Import: Import pre-design beautiful ready-made templates and customize it.
+6. Gutentor Template Import: Import pre-design beautiful ready-made templates and customize them.
 7. Visual Editor Experience: No need to view from front end to view how your block looks, change in realtime
 8. Gutentor Export-Import: Export your blocks or templates in JSON files and import using inbuild file import
 9. Gutentor Blocks: Gutentor provide complete site-building blocks and elements
 
 == Changelog ==
+
+= 3.0.9 - 2021-04-22 =
+* Added: New Block : Gutentor Module => Table of Contents [Support Request](https://wordpress.org/support/topic/table-of-content-6/)
+* Added: New Template on Post (Type) Module
+* Added: Custom CSS on every block
+* Added: [Resources Control](https://wordpress.org/support/topic/does-actually-load-unnecessary-resources/) on Gutentor => Setting => Optimization => Resources Load
+* Added: Text Alignment on Post (Type) Featured and Duplex Post (Type)
+* Added: Avatar on possible Post Modules
+* Updated: New Google Fonts
+* Updated: Reusable Block CSS
+* Updated: More optimization of resources load
+* Fixed: [Custom Post Type Support](https://wordpress.org/support/topic/custom-posts-not-showing-up-in-editor/) on Post(Type) Blocks
+* Fixed: Animation options on some cases
+* Fixed: Category/Term Color
+* Fixed: Post Format Default Color
+* Fixed: Avatar on some cases
+* Fixed: Badge options
+* Fixed: Term Image control on term modules
+* Fixed: Astra Theme Gutentor Full Width Template
+* Removed: Term Module empty background
+
+= 3.0.8 - 2021-03-26 =
+* Announce: We are serving all [Gutenberg Template Library](https://templateberg.com/gutenberg-templates/) From [Templateberg](https://wordpress.org/plugins/templateberg/). All free templates will always free and can also continue Gutentor Templates Library.
+* Added: New Block : Gutentor Module => Quote (Facebook Group Request)
+* Added: Gutentor=> Setting to hide Template Export and Import Individually (Facebook Group Request)
+* Added: Button Group Vertical and Horizontal Alignment
+* Added: On Editor Gutentor => General Options => [Disable Wide Width Editor](https://wordpress.org/support/topic/disabling-gutentor-in-posts/#post-14221190)
+* Updated: Button placeholder
+* Updated: Duplex post => EDD Download (Post Type) Price on Editor
+* Updated: Dynamic CSS condition
+* Removed: Post Format from taxonomy selection
+* Fixed: Post (Type) notification error on some conditions
+* Fixed: [Advanced Class](https://wordpress.org/support/topic/is-not-assigned-a-class-in-the-post-widget-block/) for Dynamic Blocks
 
 = 3.0.7 - 2021-03-11 =
 * Fixed: Post Widget on WordPress 5.7

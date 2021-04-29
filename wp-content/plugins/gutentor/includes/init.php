@@ -207,6 +207,9 @@ class Gutentor {
 		/*Advanced Import*/
 		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-advanced-import.php';
 
+        /*Tb Notice*/
+		require_once GUTENTOR_PATH . 'includes/tools/class-gutentor-templateberg.php';
+
 		/*Dynamic CSS*/
 		require_once GUTENTOR_PATH . 'includes/dynamic-css.php';
 

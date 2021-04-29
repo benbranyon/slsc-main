@@ -164,7 +164,10 @@ if ( ! class_exists( 'Gutentor_P2' ) ) {
 
 			$blockID = isset( $attributes['pID'] ) ? $attributes['pID'] : $attributes['gID'];
 			$gID     = isset( $attributes['gID'] ) ? $attributes['gID'] : '';
-			$output  = '';
+            $output  = $default_class = '';
+            if ( isset( $attributes['className'] ) ) {
+                $default_class = esc_attr( $attributes['className'] );
+            }
 
 			$tag                     = $attributes['mTag'] ? $attributes['mTag'] : 'section';
 			$template                = $attributes['p2Temp'] ? $attributes['p2Temp'] : '';
@@ -237,7 +240,7 @@ if ( ! class_exists( 'Gutentor_P2' ) ) {
 			$gutentor_p2_news_the_query = new WP_Query( gutentor_get_query( $query_args ) );
 
 			if ( $gutentor_p2_news_the_query->have_posts() ) :
-				$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p2', 'gutentor-post-' . $post_number, $align, 'gutentor-template-' . $template ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
+				$output .= '<' . $tag . ' class="' . apply_filters( 'gutentor_post_module_main_wrap_class', gutentor_concat_space( 'section-' . $gID, 'gutentor-post-module', 'gutentor-post-module-p2', 'gutentor-post-' . $post_number, $align, 'gutentor-template-' . $template,$default_class ), $attributes ) . '" id="' . esc_attr( $blockID ) . '" ' . GutentorAnimationOptionsDataAttr( $blockComponentAnimation ) . '>' . "\n";
 				$output .= apply_filters( 'gutentor_post_module_before_container', '', $attributes );
 				$output .= "<div class='" . apply_filters( 'gutentor_post_module_container_class', 'grid-container', $attributes ) . "'>";
 				$output .= "<div class='" . apply_filters( 'gutentor_post_module_grid_row_class', 'grid-row', $attributes ) . "'>";

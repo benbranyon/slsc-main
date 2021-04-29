@@ -170,7 +170,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
 			$cat_pos             = ( isset( $attributes['pPostCatPos'] ) ) ? $attributes['pPostCatPos'] : false;
 			$enable_featured_cat = ( isset( $attributes['pOnFeaturedCat'] ) ) ? $attributes['pOnFeaturedCat'] : false;
-			$thumb_class         = has_post_thumbnail() ? '' : 'gutentor-post-no-thumb';
+            $enable_avatar  = ( isset( $attributes['pOnAvatar'] ) ) ? $attributes['pOnAvatar'] : false;
+            $avatar_pos     = ( isset( $attributes['pAvatarPos'] ) ) ? $attributes['pAvatarPos'] : false;
+			$thumb_class         = has_post_thumbnail() ? '' : 'gutentor-post-no-thumb gtf-no-thumb';
 			$output             .= "<article class='" . apply_filters( 'gutentor_post_module_article_class', gutentor_concat_space( 'gutentor-post gtf-item-wrap', $thumb_class, 'gutentor-post-item-' . $index, 'gtf-item-' . $index ), $attributes ) . "'>";
 			$output             .= '<div class="gutentor-post-item gtf-item">';/*gutentor-post-item for bc*/
 			if ( has_post_thumbnail( $post->ID ) ) {
@@ -180,9 +182,16 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 					$enable_overlayImage = ( isset( $attributes['pFImgOColor']['enable'] ) ) ? $attributes['pFImgOColor']['enable'] : false;
 				}
 				$url     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $attributes['pFImgSize'] );
+                $background = '';
+				if( isset($url[0])){
+                    $background = 'style="background-image:url(' . esc_url( $url[0] ) . ')"';
+                }
 				$overlay = $enable_overlayImage ? 'gutentor-overlay g-overlay' : '';/*gutentor-overlay for bc*/
-				$output .= '<div class="' . gutentor_concat_space( 'gutentor-bg-image gtf-bg-image', 'gutentor-post-height gtf-item-height', $overlay ) . '" style="background-image:url(' . esc_url( $url[0] ) . ')">';/*gutentor-bg-image,gutentor-post-height for bc*/
-				if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
+				$output .= '<div class="' . gutentor_concat_space( 'gutentor-bg-image gtf-bg-image', 'gutentor-post-height gtf-item-height', $overlay ) . '" '.$background.'>';/*gutentor-bg-image,gutentor-post-height for bc*/
+                if ( $enable_avatar && $this->avatar_on_image_condition( $avatar_pos ) ) {
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
+                if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
 					$output .= $this->get_post_format_data( $post, $attributes );
 				}
 				if ( $enable_featured_cat && $this->categories_on_image_condition( $cat_pos ) ) {
@@ -190,6 +199,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				}
 				$output .= '<div class="gutentor-post-content gtf-content">';/*gutentor-post-content for bc*/
 				$output .= $this->get_primary_meta( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-title' ) {
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-title' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -199,6 +211,10 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 					$output .= $this->get_post_module_badges_collection( $post, $attributes );
 				}
 				$output .= $this->get_title( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-content' ) {
+
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-ct-box' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -209,6 +225,10 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				}
 				$output .= $this->get_description( $post, $attributes );
 				$output .= $this->get_secondary_meta( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-button' ) {
+
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-button' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -222,6 +242,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				$output .= '</div>';/*.gtf-bg-image*/
 			} else {
 				$output .= '<div class="gutentor-post-height gtf-item-height">';/*gutentor-post-height for bc*/
+                if ( $enable_avatar && $this->avatar_on_image_condition( $avatar_pos ) ) {
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
 					$output .= $this->get_post_format_data( $post, $attributes );
 				}
@@ -230,6 +253,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				}
 				$output .= '<div class="gutentor-post-content gtf-content">';/*gutentor-post-content for bc*/
 				$output .= $this->get_primary_meta( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-title' ) {
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-title' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -239,6 +265,10 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 					$output .= $this->get_post_module_badges_collection( $post, $attributes );
 				}
 				$output .= $this->get_title( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-content' ) {
+
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-ct-box' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -249,6 +279,10 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 				}
 				$output .= $this->get_description( $post, $attributes );
 				$output .= $this->get_secondary_meta( $post, $attributes );
+                if ( $enable_avatar && $avatar_pos === 'g-avatar-b-button' ) {
+
+                    $output .= $this->get_avatar_data( $post, $attributes );
+                }
 				if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-button' ) {
 
 					$output .= $this->get_post_format_data( $post, $attributes );
@@ -301,7 +335,7 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			$url         = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $attributes['pFImgSize'] );
 			$default_url = WC()->plugin_url() . '/assets/images/placeholder.png';
 			$overlay     = $enable_overlayImage ? 'gutentor-overlay g-overlay' : '';/*gutentor-overlay for bc*/
-			$output     .= '<div class="' . gutentor_concat_space( 'gutentor-bg-image gtf-bg-image', 'gutentor-post-height gtf-item-height', $overlay ) . '" style="background-image:url(' . esc_url( $url[0] ? $url[0] : $default_url ) . ')">';/*gutentor-bg-image,gutentor-post-height for bc*/
+			$output     .= '<div class="' . gutentor_concat_space( 'gutentor-bg-image gtf-bg-image', 'gutentor-post-height gtf-item-height', $overlay ) . '" style="background-image:url(' . esc_url( (is_array($url) && !empty($url)) ? $url[0] : $default_url ) . ')">';/*gutentor-bg-image,gutentor-post-height for bc*/
 			if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
 				$output .= $this->new_badge_product( $post, $product );
 			}
@@ -377,6 +411,8 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			}
 			$download            = edd_get_download( $post->ID );
 			$output              = '';
+            $enable_avatar  = ( isset( $attributes['pOnAvatar'] ) ) ? $attributes['pOnAvatar'] : false;
+            $avatar_pos     = ( isset( $attributes['pAvatarPos'] ) ) ? $attributes['pAvatarPos'] : false;
 			$enable_post_format  = ( isset( $attributes['pOnPostFormatOpt'] ) ) ? $attributes['pOnPostFormatOpt'] : false;
 			$post_format_pos     = ( isset( $attributes['pPostFormatPos'] ) ) ? $attributes['pPostFormatPos'] : false;
 			$output             .= "<article class='" . apply_filters( 'gutentor_post_module_article_class', gutentor_concat_space( 'gutentor-post gtf-item-wrap', 'gutentor-post-item-' . $index, 'gtf-item-' . $index ), $attributes ) . "'>";
@@ -390,12 +426,18 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			$default_url = GUTENTOR_URL . 'assets/img/default-image.jpg';
 			$overlay     = $enable_overlayImage ? 'gutentor-overlay g-overlay' : '';/*gutentor-overlay for bc*/
 			$output     .= '<div class="' . gutentor_concat_space( 'gutentor-bg-image gtf-bg-image', 'gutentor-post-height gtf-item-height', $overlay ) . '" style="background-image:url(' . esc_url( is_array( $url ) && ! empty( $url ) ? $url[0] : $default_url ) . ')">';/*gutentor-bg-image,gutentor-post-height for bc*/
-			if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
+            if ( $enable_avatar && $this->avatar_on_image_condition( $avatar_pos ) ) {
+                $output .= $this->get_avatar_data( $post, $attributes );
+            }
+            if ( $enable_post_format && $this->post_format_on_image_condition( $post_format_pos ) ) {
 				$output .= $this->edd_new_badge_product( $post, $download );
 
 			}
 			$output .= '<div class="gutentor-post-content gtf-content">';/*gutentor-post-content for bc*/
 			$output .= $this->get_primary_meta( $post, $attributes );
+            if ( $enable_avatar && $avatar_pos === 'g-avatar-b-title' ) {
+                $output .= $this->get_avatar_data( $post, $attributes );
+            }
 			if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-title' ) {
 				$output .= $this->edd_new_badge_product( $post, $download );
 			}
@@ -408,11 +450,19 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 					$output .= '</div>';
 				}
 			}
+            if ( $enable_avatar && $avatar_pos === 'g-avatar-b-content' ) {
+
+                $output .= $this->get_avatar_data( $post, $attributes );
+            }
 			if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-ct-box' ) {
 				$output .= $this->edd_new_badge_product( $post, $download );
 			}
 			$output .= $this->get_description( $post, $attributes );
 			$output .= $this->get_secondary_meta( $post, $attributes );
+            if ( $enable_avatar && $avatar_pos === 'g-avatar-b-button' ) {
+
+                $output .= $this->get_avatar_data( $post, $attributes );
+            }
 			if ( $enable_post_format && $post_format_pos === 'gutentor-pf-pos-before-button' ) {
 				$output .= $this->edd_new_badge_product( $post, $download );
 			}
@@ -461,8 +511,9 @@ if ( ! class_exists( 'Gutentor_Featured' ) ) {
 			$no_thumb       = '';
 			$bg_image       = '';
 			$url            = '';
+            $enabled_term_image = gutentor_get_options( 'gutentor_tax_term_image' );
 			$thumbnail_size = ( isset( $attributes['tFImgSize'] ) ) ? $attributes['tFImgSize'] : 'large';
-			if ( $this->has_term_thumbnail( $term ) ) {
+			if ( $this->has_term_thumbnail( $term ) && $enabled_term_image) {
 				$image_url = wp_get_attachment_image_src( $this->get_term_thumbnail_id( $term ), $thumbnail_size );
 				if ( ! $image_url ) {
 					$image_url[0] = GUTENTOR_URL . 'assets/img/default-image.jpg';

@@ -279,6 +279,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 				case 'gutentor/m8':
 				case 'gutentor/m9':
 				case 'gutentor/m10':
+				case 'gutentor/m13':
 					$file     = explode( '/', $block_id )[1];
 					$file_url = GUTENTOR_URL . 'assets/css/module/' . $file . $is_rtl . '.css';
 					break;
@@ -475,7 +476,8 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 					$google_font_url = $this->get_google_font_url( $gfonts );
 					if ( $google_font_url ) {
 						$message[] = __( 'Successfully get google fonts url', 'gutentor' );
-						update_post_meta( $post_id, 'gutentor_gfont_url', esc_url_raw( $google_font_url ) );
+                        delete_post_meta( $post_id, 'gutentor_gfont_url' );
+                        update_post_meta( $post_id, 'gutentor_gfont_url', esc_url_raw( $google_font_url ) );
 						$message[] = __( 'Successfully saved google fonts url', 'gutentor' );
 					} else {
 						$fonts_url = get_post_meta( $post_id, 'gutentor_gfont_url', true );
@@ -496,7 +498,8 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 						$css        = $static_css . $css;
 					}
 					$minified_css = gutentor_dynamic_css()->minify_css( $css );
-					update_post_meta( $post_id, 'gutentor_dynamic_css', $minified_css );
+                    delete_post_meta( $post_id, 'gutentor_dynamic_css' );
+                    update_post_meta( $post_id, 'gutentor_dynamic_css', $minified_css );
 					$prev_css_info = get_post_meta( $post_id, 'gutentor_css_info', true );
 					$css_info      = array(
 						'version'            => sanitize_text_field( GUTENTOR_VERSION ),
@@ -505,7 +508,8 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 						'blocks'             => array_map( 'sanitize_text_field', $params['blocks'] ),
 						'load_optimized_css' => gutentor_get_options( 'gutentor_load_optimized_css' ),
 					);
-					update_post_meta( $post_id, 'gutentor_css_info', $css_info );
+                    delete_post_meta( $post_id, 'gutentor_css_info' );
+                    update_post_meta( $post_id, 'gutentor_css_info', $css_info );
 					$message[] = __( 'Successfully saved gutentor dynamic css', 'gutentor' );
 
 					global $wp_filesystem;
@@ -547,6 +551,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 		public function get_tax_term_css( $request ) {
 			$tax_terms         = $request->get_params( 'tax_terms' )['tax_terms'];
 			$important         = ' !important;';
+            $enabled_term_color = gutentor_get_options( 'gutentor_tax_term_color' );
 			$local_dynamic_css = '';
 			foreach ( $tax_terms as $tax => $term_ids ) {
 				foreach ( $term_ids as $term_id ) {
@@ -562,12 +567,12 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 						$bg               = '#ffffff';
 						$hover_bg         = '#ffffff';
 						$hover_text_color = '#1974d2';
-						if ( $gutentor_meta ) {
+						if ( $enabled_term_color && $gutentor_meta ) {
 							$bg               = isset( $gutentor_meta['bg-color'] ) ? $gutentor_meta['bg-color'] : '';
 							$hover_bg         = isset( $gutentor_meta['bg-hover-color'] ) ? $gutentor_meta['bg-hover-color'] : '';
 							$text_color       = isset( $gutentor_meta['text-color'] ) ? $gutentor_meta['text-color'] : '';
 							$hover_text_color = isset( $gutentor_meta['text-hover-color'] ) ? $gutentor_meta['text-hover-color'] : '';
-						} elseif ( get_option( $cat_color ) ) {/*backward compatibility*/
+						} elseif ( $enabled_term_color && get_option( $cat_color ) ) {/*backward compatibility*/
 							$gutentor_cat_options = get_option( $cat_color );
 							$gutentor_cat_options = json_decode( $gutentor_cat_options, true );
 
@@ -576,6 +581,11 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 							$text_color       = isset( $gutentor_cat_options['text-color'] ) && ! empty( $gutentor_cat_options['text-color'] ) ? $gutentor_cat_options['text-color'] : '';
 							$hover_text_color = isset( $gutentor_cat_options['text-hover-color'] ) && ! empty( $gutentor_cat_options['text-hover-color'] ) ? $gutentor_cat_options['text-hover-color'] : '';
 						}
+
+                        $text_color     = empty($text_color) ? '#1974d2' : $text_color;
+                        $bg             = empty($bg) ? '#ffffff' : $bg;
+                        $hover_bg       = empty($hover_bg) ? '#ffffff' : $hover_bg;
+                        $hover_text_color = empty($hover_text_color) ? '#1974d2' : $hover_text_color;
 
 						/*Cat normal color */
 						$cat_color_css = '';
@@ -1172,7 +1182,7 @@ if ( ! class_exists( 'Gutentor_Dynamic_CSS' ) ) :
 						case 'gutentor/m8':
 						case 'gutentor/m9':
 						case 'gutentor/m10':
-						case 'gutentor/m11':
+						case 'gutentor/m13':
 						case 'gutentor/p1':
 						case 'gutentor/p3':
 						case 'gutentor/p2':
